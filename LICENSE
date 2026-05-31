@@ -1,4 +1,4 @@
-# Code: MIT License
+Code: MIT License
 
 MIT License
 
@@ -22,35 +22,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
----
 
-# Data: CC BY 4.0
+Data: CC BY 4.0
 
 This data is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
 
 You are free to:
 
-- **Share** — copy and redistribute the material in any medium or format
-- **Adapt** — remix, transform, and build upon the material for any purpose, even commercially.
+Share and copy the material in any medium or format.
+Adapt and build upon the material for any purpose, even commercially.
 
 Under the following terms:
 
-- **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+Attribution: You must give appropriate credit, provide a link to the license, and indicate if changes were made.
 
-- **No additional restrictions** — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+No additional restrictions: You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
 
-## Notices
-
-You do not have to comply with the license for elements of the material that are in the public domain or where your use is permitted by an applicable exception or limitation.
-
-No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
-
----
+No warranties are given. The license may not give you all the permissions necessary for your intended use.
 
 Full license texts:
-- MIT: https://opensource.org/licenses/MIT
-- CC BY 4.0: https://creativecommons.org/licenses/by/4.0/legalcode
+MIT: https://opensource.org/licenses/MIT
+CC BY 4.0: https://creativecommons.org/licenses/by/4.0/legalcode
 
-## Data Source Attribution
-
-The original financial data used to construct this benchmark is sourced from CSMAR and CNRDS, and is subject to their respective license agreements. The annotations and data samples provided in this repository are original contributions of the authors.
+Data Source Attribution: The original financial data used to construct this benchmark is sourced from CSMAR and CNRDS, and is subject to their respective license agreements. The annotations and data samples in this repository are original contributions of the authors.
