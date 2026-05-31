@@ -60,7 +60,7 @@ Label values:
 
 Clone the repository and install dependencies:
 ```
-git clone https://anonymous.4open.science/r/EarningsBench
+git clone https://anonymous.4open.science/r/EarningsBench-EB7B
 cd EarningsBench
 pip install -r requirements.txt
 ```
