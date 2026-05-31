@@ -17,16 +17,17 @@ This repository supports:
 ## Repository Structure
 ```
 earningsbench/
-├── data/
-│   ├── sample/           # 10% data sample (500 sentences)
-│   ├── train.json        # Training split (70%)
-│   ├── dev.json          # Development split (15%)
-│   └── test.json         # Test split (15%)
+├── data/                         # 10% data sample (500 sentences total)
+│   ├── train_samples.json        # Training split (70% of the 10%, with reason)
+│   ├── dev_samples.json          # Development split (15% of the 10%, with reason)
+│   └── test_samples.json         # Test split (15% of the 10%, without reason)
 ├── scripts/
-│   ├── evaluate.py       # Evaluation script
-│   ├── baseline_lr.py    # Logistic Regression baseline
-│   ├── baseline_bert.py  # BERT/FinBERT fine-tuning
-│   └── baseline_llm.py   # LLM fine-tuning with CoT
+│   ├── train_bert.py             # BERT-base (Chinese)
+│   ├── train_cnn.py              # TextCNN
+│   ├── train_finbert.py          # FinBERT (Chinese)
+│   ├── train_finscot.py          # LLM + FinSCoT
+│   ├── train_lora.py             # LLM + LoRA
+│   └── train_lstm.py             # BiLSTM
 ├── requirements.txt
 └── LICENSE
 ```
@@ -35,59 +36,74 @@ earningsbench/
 
 Each sample is a JSON object with the following fields:
 
+```json
 {
-  "sentence_id": "unique_identifier",
-  "text": "The original sentence from MD&A section",
-  "label": 0,
-  "reason": "Automated reasoning annotation for CoT fine-tuning"
+  "instruction": "请判断以下财报文本句子，判断其表达的情感标签（0-中性或悲观, 1-稍微乐观, 2-比较乐观, 3-非常乐观）。",
+  "input": "The original sentence from MD&A section",
+  "output": "1",
+  "reason": "Automated reasoning annotation for FinSCoT fine-tuning"
 }
+```
 
-## Data Format
-
-Each sample is a JSON object with the following fields:
-
-{
-  "sentence_id": "unique_identifier",
-  "text": "The original sentence from MD&A section",
-  "label": 0,
-  "reason": "Automated reasoning annotation for CoT fine-tuning"
-}
+> Note: The "reason" field is only present in training and development sets. Test set samples contain only instruction, input, and output fields.
 
 Label values:
 
-0 = Neutral or Pessimistic
-
-1 = Slightly Optimistic
-
-2 = Relatively Optimistic
-
-3 = Very Optimistic
+- 0 = Neutral or Pessimistic
+- 1 = Slightly Optimistic
+- 2 = Relatively Optimistic
+- 3 = Very Optimistic
 
 ## Quick Start
 
 ### Installation
 
 Clone the repository and install dependencies:
-
 ```
 git clone https://anonymous.4open.science/r/EarningsBench
 cd EarningsBench
 pip install -r requirements.txt
 ```
 
-### Run Evaluation
+### Run Baseline Models
 
-Run the evaluation script on the test set:
+Run BERT-base (Chinese) on the sample data:
+```
+python scripts/train_bert.py --data_dir data/
+```
 
-python scripts/evaluate.py --model bert --data data/test.json
+Run FinBERT on the sample data:
+```
+python scripts/train_finbert.py --data_dir data/
+```
 
-Available models: lr, xgboost, textcnn, bilstm, bert, finbert, llama, qwen
+Run TextCNN on the sample data:
+```
+python scripts/train_cnn.py --data_dir data/
+```
+
+Run BiLSTM on the sample data:
+```
+python scripts/train_lstm.py --data_dir data/
+```
+
+Run LLM + LoRA (baseline without CoT):
+```
+python scripts/train_lora.py --data_dir data/ --model_dir /path/to/llm
+```
+
+Run FinSCoT (LLM + FinSCoT, our method):
+```
+python scripts/train_finscot.py --data_dir data/ --model_dir /path/to/llm
+```
+
+> Note: For LLM-based models (train_lora.py and train_finscot.py), you need to download the base LLM (e.g., Qwen3-8B or LLaMA3.1-8B) and specify its path via --model_dir.
 
 ## License
 
 This repository contains two types of content under different licenses.
 
-Code (scripts, evaluation tools): MIT License
+Code (scripts in scripts/ folder): MIT License
 
 Data samples (annotated sentences in the data/ folder): CC BY 4.0 License
 
